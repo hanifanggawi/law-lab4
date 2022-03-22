@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Request, UploadFile
 from sqlalchemy.orm import Session
 
 from typing import Optional
@@ -48,3 +48,11 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
         raise HTTPException(404, 'Product not found')
     crud.delete_product(db=db, product=db_product)
     return { 'detail' : 'Product successfully deleted'}
+
+@app.post("/uploadfile/")
+async def upload_file(file: UploadFile, db: Session = Depends(get_db)):
+    try:
+        db_file = crud.create_file(db, file=file)
+    except:
+        raise HTTPException(500, 'Upload Failed')
+    return {"detail": f'successfully uploaded {db_file.file_name}'} 

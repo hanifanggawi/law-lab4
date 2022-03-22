@@ -16,3 +16,10 @@ class Product(ProductBase):
     class Config:
         orm_mode = True
 
+class File(BaseModel):
+    id: int
+    file: bytes
+    file_name: str
+
+    class Config:
+        orm_mode = True

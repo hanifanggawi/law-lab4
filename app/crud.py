@@ -1,3 +1,4 @@
+from fastapi import UploadFile
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -28,3 +29,11 @@ def update_product(db: Session, product: schemas.ProductCreate, db_product=model
 def delete_product(db: Session, product: schemas.ProductCreate):
     db.delete(product)
     db.commit()
+
+def create_file(db: Session, file: UploadFile):
+    contents = file.file.read()
+    db_file = models.File(file=contents, file_name=file.filename)
+    db.add(db_file)
+    db.commit()
+    db.refresh(db_file)
+    return db_file

@@ -4,7 +4,6 @@ from sqlalchemy.orm import sessionmaker
 from .config import DATABASE_URL
 
 SQLALCHEMY_DATABASE_URL = DATABASE_URL
-print('DISINI', SQLALCHEMY_DATABASE_URL)
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
