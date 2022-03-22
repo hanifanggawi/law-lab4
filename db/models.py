@@ -1,4 +1,3 @@
-from enum import unique
 from sqlalchemy import Column, Integer, String, LargeBinary
 
 from .database import Base
@@ -16,4 +15,4 @@ class File(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     file = Column(LargeBinary)
-    file_name = Column(String, unique=True)
+    file_name = Column(String)
